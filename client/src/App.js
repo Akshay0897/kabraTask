@@ -1,13 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
-import BlogForm from './components/form.component';
+import BlogForm from './components/form/form.component';
+import List from './components/list/list.component';
+import Header from './components/header/header.component';
 import './App.css';
-
+import {Route,Switch} from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <BlogForm />
+    <div>
+      <Header />
+      <Switch>
+          <Route path='/blogform' component={BlogForm} />
+          <Route path='/' exact component={List} />
+      </Switch>
     </div>
   );
 }
