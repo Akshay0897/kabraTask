@@ -3,19 +3,21 @@ import Forminput from '../form-input/form-input.component';
 import './form.styles.scss'
 import axios from 'axios';
 
-class form extends Component {
-
-    state = {
+const initialState = {
         title:'',
         desc:'',
         image:null,
         imageUrl:''
-    }
+};
+
+class form extends Component {
+
+    state = Object.assign({},initialState);
 
     checkMimeType=(event)=>{
         let file = event.target.files[0] 
         let err = '',type=file.type;
-        
+
        const types = ['image/png', 'image/jpeg', 'image/gif']
          // compare file type find doesn't matach
              if (types.every(type => file.type !== type)) {
@@ -73,6 +75,12 @@ class form extends Component {
         }); 
     }
 
+    clearform = () => {
+       
+        this.setState(initialState);
+
+    }
+
     render(){
         return(
              <div className='container'>
@@ -81,6 +89,7 @@ class form extends Component {
                     <Forminput label='title' name='title' type='text' required handleChange={this.handleChange} value={this.state.title}></Forminput>
                     <Forminput label='description' name='desc' type='text' required handleChange={this.handleChange} value={this.state.desc}></Forminput>
                     <Forminput label='choose image for your blog' name='image' type='file' required handleChange={this.handleChange}></Forminput>
+                    <button style={{marginBottom:'10px'}} className='custom-button' type='button' onClick={this.clearform}>Clear Form</button>
                     <button className='custom-button' type='submit'>Create Blog</button>
                     </form>
                 </div>
