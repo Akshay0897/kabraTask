@@ -1,9 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config({path :'../config.env'});
-const path = require("path");
 const app = require('./app');
 const mongoose = require('mongoose');
-const Grid = require('gridfs-stream');
 mongoose.Promise = global.Promise;
 
 const port  = process.env.PORT || 3000;

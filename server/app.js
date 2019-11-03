@@ -62,6 +62,8 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage });
 
+
+//for upload single image
 app.post("/api/upload", upload.single('myImage'),async function (req, res, next) {
 
   let obj = Object.assign({}, { title: req.body.title }, { desc: req.body.desc } , { images : req.file.filename } );
@@ -72,6 +74,8 @@ app.post("/api/upload", upload.single('myImage'),async function (req, res, next)
     })
 });
 
+
+//to get all the blogs 
 app.get("/api/getblogs", async function (req, res, next) {
 
   const blogdata = await blog.find({});
@@ -80,10 +84,10 @@ app.get("/api/getblogs", async function (req, res, next) {
   })
 }); 
 
-
+//to get single blog image from gridfs 
 app.get("/api/getblogimage/:name", async function (req, res, next) {
 
-  console.log( req.params.name);
+ // console.log( req.params.name);
   
   gfs.files.findOne({ filename: req.params.name }, (err, file) => {
     // Check if file
@@ -107,7 +111,7 @@ app.get("/api/getblogimage/:name", async function (req, res, next) {
 
 app.all('*', (req, res, next) => {
     res.status(404).send({
-      'message':'no routes for this path bitch'
+      'message':'no routes for this path'
     })
 });
 
